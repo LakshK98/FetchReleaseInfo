@@ -16,6 +16,7 @@ set(SRCS
     src/main.cpp
     src/cloud_image_info_provider.cpp
     src/curl_request.cpp
+    src/command_parser.cpp
 )
 add_executable(FetchReleaseInfoBin ${SRCS})
 
