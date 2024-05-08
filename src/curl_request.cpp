@@ -1,4 +1,5 @@
 #include "curl_request.hpp"
+#include <stdexcept>
 
 CURLRequest::CURLRequest() : curl(curl_easy_init(), &curl_easy_cleanup)
 {

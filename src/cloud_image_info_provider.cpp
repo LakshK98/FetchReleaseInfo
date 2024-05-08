@@ -1,6 +1,7 @@
 #include "cloud_image_info_provider.hpp"
 #include "curl_request.hpp"
 #include <iostream>
+#include <stdexcept>
 
 CloudImageReleaseInfoProvider::CloudImageReleaseInfoProvider(const std::string url, const std::string arch)
 {
