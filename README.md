@@ -45,8 +45,13 @@ Windows
 ```
 
 5. Run CmMake
+- On Mac and Linux
 ```
   cmake ..
+```
+- On Windows
+```
+  cmake -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg.make
 ```
 
 6. Build the project
@@ -57,7 +62,19 @@ Windows
 
 - On Windows
 ```
-  make -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg.make
+  msbuild FetchReleaseInfo.sln
+```
+
+7. Run the project
+- On Mac and Linux
+```
+  ./FetchReleaseInfo < command >
+```
+
+- On Windows
+```
+  cd Debug
+  FetchReleaseInfo.exe < command >
 ```
 
 ## Usage:
