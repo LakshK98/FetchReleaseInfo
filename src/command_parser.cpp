@@ -90,10 +90,10 @@ std::string CommandParser::getOptions(const std::string &key) const
 
 void CommandParser::printAvailableCommands() const
 {
-  std::cout << "Available commands: " << std::endl;
-  std::cout << "  supported_releases" << std::endl;
-  std::cout << "  current_lts_version" << std::endl;
-  std::cout << "  disk_image_sha256_for_release --release=<release_version>" << std::endl;
+  std::cout << "\nUsage:\n " << std::endl;
+  std::cout << " FetchReleaseInfo supported_releases\n" << std::endl;
+  std::cout << " FetchReleaseInfo current_lts_version\n" << std::endl;
+  std::cout << " FetchReleaseInfo disk_image_sha256_for_release --release=<release>\n" << std::endl;
 }
 
 void CommandParser::handleInvalidCommand() const
