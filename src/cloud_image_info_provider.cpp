@@ -59,9 +59,10 @@ std::vector<std::string> CloudImageReleaseInfoProvider::getSupportedReleases()
   std::vector<std::string> releaseList;
   for (const auto &[prodKey, prod] : products.items())
   {
-    if (prod.contains("supported") && prod["supported"])
+    if (prod.contains("supported") && prod["supported"] &&
+        prod.contains("release"))
     {
-      releaseList.push_back(prodKey);
+      releaseList.push_back(prod["release"]);
     }
   }
   return releaseList;
@@ -97,7 +98,7 @@ std::string CloudImageReleaseInfoProvider::getDiskImageSha256ForRelease(const st
 
   for (const auto &[prodKey, prodInfo] : products.items())
   {
-    if (prodInfo.contains("version") && prodInfo["version"] == release && prodInfo.contains("versions"))
+    if (prodInfo.contains("version") && prodInfo["release"] == release && prodInfo.contains("versions"))
     {
       auto latestVersion = prodInfo["versions"].rbegin().key();
       if (prodInfo["versions"][latestVersion].contains("items") &&
