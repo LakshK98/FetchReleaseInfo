@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
     case Command::DISK_IMAGE_SHA256_FOR_RELEASE:
       processGetDiskImageCommand(releaseInfoProvider, cmd.getOptions("release"));
       break;
+
     default:
       break;
     }

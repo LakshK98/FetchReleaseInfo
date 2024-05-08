@@ -14,7 +14,7 @@ std::string CURLRequest::perform(const std::string &url)
 {
   if (!curl)
   {
-    return "";
+    throw std::runtime_error("Failed to initialize cURL");
   }
 
   curl_easy_setopt(curl.get(), CURLOPT_URL, url.c_str());
@@ -26,7 +26,7 @@ std::string CURLRequest::perform(const std::string &url)
   CURLcode res = curl_easy_perform(curl.get());
   if (res != CURLE_OK)
   {
-    return "";
+    throw std::runtime_error("cURL request failed: " + std::string(curl_easy_strerror(res)));
   }
 
   return responseData;

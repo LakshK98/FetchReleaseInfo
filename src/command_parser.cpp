@@ -7,46 +7,47 @@ CommandParser::CommandParser(int argc, char *argv[])
 
 void CommandParser::parseCommands(int argc, char *argv[])
 {
-  if (argc < 2)
+  if (argc >= 2)
   {
-    std::cerr << "No command specified." << std::endl;
-    handleInvalidCommand();
-  }
-  selectedCommand = stringToCommand(argv[1]);
-  // TODO: generalize parse options
-  if (selectedCommand == Command::DISK_IMAGE_SHA256_FOR_RELEASE)
-  {
-    if (argc > 2)
+    selectedCommand = stringToCommand(argv[1]);
+    // TODO: generalize parse options
+    if (selectedCommand == Command::DISK_IMAGE_SHA256_FOR_RELEASE)
     {
-      std::string arg = argv[2];
-      if (arg.substr(0, 2) == "--")
+      if (argc > 2)
       {
-        std::string::size_type pos = arg.find('=');
-        if (pos != std::string::npos)
+        std::string arg = argv[2];
+        if (arg.substr(0, 2) == "--")
         {
-          std::string key = arg.substr(2, pos - 2);
-          if (key == "release")
+          std::string::size_type pos = arg.find('=');
+          if (pos != std::string::npos)
           {
-            std::string value = arg.substr(pos + 1);
-            options[key] = value;
-            return;
+            std::string key = arg.substr(2, pos - 2);
+            if (key == "release")
+            {
+              std::string value = arg.substr(pos + 1);
+              options[key] = value;
+              return;
+            }
+          }
+          else
+          {
+            std::cerr << "Invalid option format: " << arg << std::endl;
           }
         }
-        else
-        {
-          std::cerr << "Invalid option format: " << arg << std::endl;
-          handleInvalidCommand();
-        }
+      }
+      else
+      {
+        std::cerr << "Invalid option format" << std::endl;
       }
     }
-    else
+    else if (argc == 2 && selectedCommand != Command::INVALID)
     {
-      std::cerr << "Invalid option format" << std::endl;
+      return;
     }
   }
-  else if (argc == 2)
+  else
   {
-    return;
+    std::cerr << "No command specified." << std::endl;
   }
   handleInvalidCommand();
 }
@@ -67,8 +68,7 @@ Command CommandParser::stringToCommand(const std::string &commandStr) const
   }
   else
   {
-    std::cerr << "Invalid command: " + commandStr << std::endl;
-    handleInvalidCommand();
+    std::cerr << "Invalid Command: " << commandStr << std::endl;
     return Command::INVALID;
   }
 }

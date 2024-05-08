@@ -34,7 +34,6 @@ void CloudImageReleaseInfoProvider::applyArchFilter(const std::string arch)
 
 void CloudImageReleaseInfoProvider::getProducts()
 {
-
   try
   {
     products = json::parse(jsonData);
